@@ -27,3 +27,26 @@ tasks:
     desc: 'Generate age key to: {{.SOPS_AGE_KEY_FILE}}'
     cmds:
       - age-keygen > {{.SOPS_AGE_KEY_FILE}}
+
+  encrypt:
+    desc: 'Encrypt file given file to: {{.ENCRYPT_TARGET}}'
+    cmds:
+      - mkdir -p $(dirname {{.DEST}})
+      - ansible-vault encrypt {{.SRC}} --output {{.DEST}}
+    vars:
+      SRC: '{{ (split " " .CLI_ARGS)._0 }}'
+      DEST: '{{.ENCRYPT_TARGET}}/{{ (split " " .CLI_ARGS)._1 }}'
+
+  export:gpg:
+    desc: Export your gpg keys with given id
+    cmds:
+      - mkdir -p $(dirname {{.target}})
+      - gpg --export-secret-keys {{.CLI_ARGS}} > {{.tempfile}}
+      - cp {{.tempfile}} {{.target}}
+      - ansible-vault encrypt {{.target}}
+      - rm {{.tempfile}}
+      - echo "exported to gpg/{{.filename}}"
+    vars:
+      filename: gpg-{{.CLI_ARGS}}.key
+      tempfile: /tmp/{{.filename}}
+      target: '{{.ENCRYPT_TARGET}}/gpg/{{.filename}}'

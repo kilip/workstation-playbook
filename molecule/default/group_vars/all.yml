@@ -4,7 +4,12 @@ build_shell: yes
 build_development: yes
 
 user: toni
-user_shell: fish
+user_ssh_keys:
+  - ssh/id_rsa
+user_gpg_keys:
+  - file: gpg/gpg-3C9B6EBE88D163FA.key
+  - file: gpg/gpg-40A29F572C8134B1.key
+user_shell: "/usr/bin/fish"
 
 omf: yes
 omz: yes
