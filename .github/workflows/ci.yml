@@ -62,5 +62,5 @@ jobs:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
           MOLECULE_DIST: ${{ matrix.distro }}
-          PROJECT_DIR: ${{ env.PWD}}
+          PROJECT_DIR: ${{ GITHUB_WORKSPACE }}
           DEPLOY: "dev"
