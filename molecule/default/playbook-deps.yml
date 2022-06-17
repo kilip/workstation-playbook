@@ -1,0 +1,11 @@
+---
+- name: Prepare control node
+  hosts: controlnode
+  become: true
+  environment:
+    ANSIBLE_RUN_TAGS: deps
+  tasks:
+    - name: Include deps tasks
+      ansible.builtin.include_role:
+        name: core
+        tasks_from: deps/main.yml

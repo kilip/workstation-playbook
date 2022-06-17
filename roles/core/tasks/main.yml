@@ -1,0 +1,15 @@
+---
+- name: Core tasks
+  block:
+    - name: Ensure deps task included
+      ansible.builtin.include_tasks:
+        file: deps/main.yml
+        apply:
+          tags: [deps]
+      tags: [deps]
+
+    - name: Ensure control node initialized
+      ansible.builtin.include_tasks: init/main.yml
+      tags: [init]
+
+  delegate_to: localhost

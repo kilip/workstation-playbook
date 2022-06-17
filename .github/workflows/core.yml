@@ -1,8 +1,11 @@
 ---
-name: CI
+name: Core
 on:
   workflow_dispatch:
   push:
+    paths:
+      - roles/core
+      - molecule/core
     branches: [main]
   pull_request:
     branches:
@@ -55,13 +58,15 @@ jobs:
           cache: pip
 
       - name: Install test dependencies.
-        run: make deps
+        run: make ansible-deps
 
       - name: Run Molecule tests.
-        run: make testing
+        run: |
+          make testing
         env:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
           MOLECULE_DIST: ${{ matrix.distro }}
           PROJECT_DIR: "/home/runner/work/workstation/workstation/kilip.workstation"
           DEPLOY: "dev"
+          PLAYBOOK: deps
