@@ -5,9 +5,13 @@ deps:
 	pip3 install -r requirements.txt
 	ansible-galaxy install -r requirements.yml
 	ansible-galaxy collection install -r requirements.yml
+	ansible-playbook playbook-core.yml --tags=deps
 
 converge:
 	molecule converge
+
+verify:
+	molecule verify
 
 destroy:
 	molecule destroy
@@ -17,4 +21,10 @@ testing:
 	molecule test
 
 login:
-	docker exec -e COLUMNS=94 -e LINES=54 -e TERM=bash -e TERM=xterm -ti instance bash
+	molecule login
+
+configure:
+	ansible-playbook playbook-core.yml --tags=configure
+
+ping:
+	ansible all -m ping

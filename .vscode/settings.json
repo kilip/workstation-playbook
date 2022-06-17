@@ -3,6 +3,7 @@
   "files.associations": {
     "**/playbooks/*.yml": "ansible",
     "**/roles/**/*.yml": "ansible",
-    "**/molecule/*/playbook-*.yml": "ansible"
+    "**/molecule/*/playbook-*.yml": "ansible",
+    "**/playbook-*.yml": "ansible"
   }
 }

@@ -12,11 +12,17 @@ platforms:
     privileged: true
     groups:
       - workstation
+      - controlnode
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - ${PROJECT_DIR}:/project
 
 provisioner:
   name: ansible
+  env:
+    ANSIBLE_ROLES_PATH: ${PROJECT_DIR}/roles
   playbooks:
-    converge: "${PROJECT_DIR}/build.yml"
+    converge: "playbook-${PLAYBOOK:-build}.yml"
   inventory:
     links:
       group_vars: "${PROJECT_DIR}/molecule/default/group_vars"

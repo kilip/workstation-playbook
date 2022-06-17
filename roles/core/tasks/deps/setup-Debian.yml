@@ -1,0 +1,31 @@
+---
+- name: Ensure cache updated
+  ansible.builtin.apt:
+    update_cache: yes
+    cache_valid_time: 600
+
+- name: Ensure required package installed
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - direnv
+    - age
+
+- name: Ensure sops stat gathered
+  ansible.builtin.stat:
+    path: "/usr/local/bin/sops"
+  register: _sops
+
+- name: Ensure mozilla sops installed
+  block:
+    - name: Ensure sops debian package downloaded
+      ansible.builtin.get_url:
+        url: https://github.com/mozilla/sops/releases/download/v3.7.3/sops_3.7.3_amd64.deb
+        dest: "/tmp/sops.deb"
+        validate_certs: false
+    - name: Ensure sops installed
+      ansible.builtin.apt:
+        deb: /tmp/sops.deb
+        state: present
+  when: not _sops.stat.exists

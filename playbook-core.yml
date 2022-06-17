@@ -1,0 +1,12 @@
+---
+- name: Ensure control-node dependencies installed
+  hosts: localhost
+  gather_facts: yes
+  roles:
+    - name: core
+
+- name: Ensure workstation build
+  hosts: all
+  roles:
+    - name: kilip.workstation.build
+      tags: build
