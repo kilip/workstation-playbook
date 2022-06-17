@@ -10,6 +10,8 @@ platforms:
     image: kilip/molecule-${DIST:-ubuntu-22.04}
     pre_build_image: true
     privileged: true
+    groups:
+      - workstation
 
 provisioner:
   name: ansible
@@ -17,7 +19,7 @@ provisioner:
     converge: "${PROJECT_DIR}/build.yml"
   inventory:
     links:
-      group_vars: "${PROJECT_DIR}/inventories/${DEPLOY}/group_vars"
+      group_vars: "${PROJECT_DIR}/molecule/default/group_vars"
 
 verifier:
   name: ansible

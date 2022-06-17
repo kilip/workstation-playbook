@@ -1,0 +1,9 @@
+---
+
+user_shell: /usr/bin/fish
+chezmoi_repo: https://github.com/kilip/molecule-dotfiles
+
+build_development: yes
+
+phpbrew: yes
+pyenv: yes

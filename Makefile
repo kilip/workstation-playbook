@@ -1,4 +1,5 @@
 #!make
+PROJECT_DIR := ${PWD}
 
 deps:
 	pip3 install -r requirements.txt

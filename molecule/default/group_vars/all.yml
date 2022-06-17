@@ -1,0 +1,8 @@
+---
+
+build_shell: yes
+
+user: toni
+
+omf: yes
+omz: yes
