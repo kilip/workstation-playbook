@@ -12,4 +12,8 @@ destroy:
 	molecule destroy
 
 testing:
+	molecule --version
 	molecule test
+
+login:
+	docker exec -e COLUMNS=94 -e LINES=54 -e TERM=bash -e TERM=xterm -ti instance bash

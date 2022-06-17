@@ -7,7 +7,7 @@ driver:
 
 platforms:
   - name: instance
-    image: kilip/molecule-ubuntu-22.04
+    image: kilip/molecule-${DIST:-ubuntu-22.04}
     pre_build_image: true
     privileged: true
 
@@ -17,8 +17,7 @@ provisioner:
     converge: "${PROJECT_DIR}/build.yml"
   inventory:
     links:
-      host_vars: "${PROJECT_DIR}/inventories/dev/host_vars"
-      group_vars: "${PROJECT_DIR}/inventories/dev/group_vars"
+      group_vars: "${PROJECT_DIR}/inventories/${DEPLOY}/group_vars"
 
 verifier:
   name: ansible
