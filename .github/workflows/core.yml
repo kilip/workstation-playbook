@@ -8,8 +8,10 @@ on:
       - molecule/core
     branches: [main]
   pull_request:
-    branches:
-      - main
+    paths:
+      - roles/core
+      - molecule/core
+    branches: [main]
 
 defaults:
   run:
@@ -37,8 +39,8 @@ jobs:
       - name: Lint code.
         run: |
           yamllint .
-  molecule:
-    name: Molecule (${{ matrix.distro }})
+  core:
+    name: Core (${{ matrix.distro }})
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
