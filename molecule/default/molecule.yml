@@ -16,8 +16,9 @@ provisioner:
   playbooks:
     converge: "${PROJECT_DIR}/build.yml"
   inventory:
-    host_vars: "${PROJECT_DIR}/inventories/dev/host_vars"
-    group_vars: "${PROJECT_DIR}/inventories/dev/group_vars"
+    links:
+      host_vars: "${PROJECT_DIR}/inventories/dev/host_vars"
+      group_vars: "${PROJECT_DIR}/inventories/dev/group_vars"
 
 verifier:
   name: ansible

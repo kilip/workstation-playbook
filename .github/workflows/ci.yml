@@ -1,0 +1,64 @@
+---
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches:
+      - main
+
+defaults:
+  run:
+    working-directory: 'kilip.template'
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v3
+        with:
+          path: kilip.template
+
+      - name: Set up Python 3.
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.10'
+          cache: pip
+
+      - name: Install test dependencies.
+        run: pip3 install yamllint
+
+      - name: Lint code.
+        run: |
+          yamllint .
+  molecule:
+    name: Molecule (${{ matrix.distro }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        distro:
+          - ubuntu-22.04
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v3
+        with:
+          path: kilip.template
+
+      - name: Set up Python 4.
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+          cache: pip
+
+      - name: Install test dependencies.
+        run: make deps
+
+      - name: Run Molecule tests.
+        run: make testing
+        env:
+          PY_COLORS: '1'
+          ANSIBLE_FORCE_COLOR: '1'
+          MOLECULE_DIST: ${{ matrix.distro }}
