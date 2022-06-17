@@ -1,5 +1,4 @@
 - name: Start Building Workstations
   hosts: all
-  tasks:
-    - debug: msg="Hello World"
-    - debug: var=user
+  roles:
+    - kilip.workstation.build
