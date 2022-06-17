@@ -5,6 +5,7 @@ tasks:
   deps:
     desc: Install project dependencies
     cmds:
+      - ansible-galaxy install -r requirements.yml
       - ansible-galaxy collection install -r requirements.yml
 
   ping:
@@ -15,4 +16,14 @@ tasks:
   build:
     desc: Build workstation
     cmds:
-      - ansible-playbook build.yml
+      - ansible-playbook playbook-build.yml
+
+  login:
+    desc: Login into test node
+    cmds:
+      - molecule login
+
+  age:generate:key:
+    desc: 'Generate age key to: {{.SOPS_AGE_KEY_FILE}}'
+    cmds:
+      - age-keygen > {{.SOPS_AGE_KEY_FILE}}

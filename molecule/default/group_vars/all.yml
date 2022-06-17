@@ -1,8 +1,12 @@
 ---
 
 build_shell: yes
+build_development: yes
 
 user: toni
+user_shell: fish
 
 omf: yes
 omz: yes
+phpbrew: yes
+pyenv: yes

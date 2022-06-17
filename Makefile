@@ -1,4 +1,5 @@
 #!make
+
 PROJECT_DIR := ${PWD}
 
 ansible-deps:
@@ -29,4 +30,5 @@ configure:
 	ansible-playbook playbook-core.yml --tags=configure
 
 ping:
+	echo ${SOPS_AGE_KEY_FILE}
 	ansible all -m ping

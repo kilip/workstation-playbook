@@ -1,6 +1,8 @@
 ---
 dependency:
   name: galaxy
+  options:
+    role-file: ${PROJECT_DIR}/requirements.yml
 
 driver:
   name: docker
@@ -21,6 +23,7 @@ provisioner:
   name: ansible
   env:
     ANSIBLE_ROLES_PATH: ${PROJECT_DIR}/roles
+    SOPS_AGE_KEY_FILE: ${PROJECT_DIR}/molecule/default/age.keys
   playbooks:
     converge: "playbook-${PLAYBOOK:-build}.yml"
   inventory:

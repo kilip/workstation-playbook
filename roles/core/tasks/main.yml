@@ -8,8 +8,8 @@
           tags: [deps]
       tags: [deps]
 
-    - name: Ensure configure tasks included
-      ansible.builtin.include_tasks: configure/main.yml
-      tags: [configure]
+    - name: Ensure control node initialized
+      ansible.builtin.include_tasks: init/main.yml
+      tags: [init]
 
   delegate_to: localhost

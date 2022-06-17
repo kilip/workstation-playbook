@@ -1,3 +1,0 @@
----
-- name: Configure
-  debug: msg="It's from configure"
