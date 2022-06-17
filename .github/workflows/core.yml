@@ -1,8 +1,11 @@
 ---
-name: CI
+name: Core
 on:
   workflow_dispatch:
   push:
+    paths:
+      - roles/core
+      - molecule/core
     branches: [main]
   pull_request:
     branches:
