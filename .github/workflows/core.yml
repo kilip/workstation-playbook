@@ -4,13 +4,13 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - roles/core
-      - molecule/core
+      - roles/core/**
+      - molecule/core/**
     branches: [main]
   pull_request:
     paths:
-      - roles/core
-      - molecule/core
+      - roles/core/**
+      - molecule/core/**
     branches: [main]
 
 defaults:
