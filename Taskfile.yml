@@ -1,0 +1,18 @@
+version: 3
+
+tasks:
+
+  deps:
+    desc: Install project dependencies
+    cmds:
+      - ansible-galaxy collection install -r requirements.yml
+
+  ping:
+    desc: Ping your existing workstation
+    cmds:
+      - ansible all -m ping
+
+  build:
+    desc: Build workstation
+    cmds:
+      - ansible-playbook build.yml
