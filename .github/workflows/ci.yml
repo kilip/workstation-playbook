@@ -55,7 +55,7 @@ jobs:
           cache: pip
 
       - name: Install test dependencies.
-        run: make deps
+        run: make ansible-deps
 
       - name: Run Molecule tests.
         run: |
