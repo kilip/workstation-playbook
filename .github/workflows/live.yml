@@ -5,10 +5,12 @@ on:
   push:
     paths:
       - inventory/**
+      - molecule/default/**
     branches: [live]
   pull_request:
     paths:
       - inventory/**
+      - molecule/default/**
     branches: [live]
 
 jobs:
